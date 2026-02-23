@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Skillfield — Intelligent Services. Secure by Design.</title>
+  <title>Skillfield — Cyber Security, AI &amp; Data Services Specialists</title>
 
   <style>
     /* ============================================================
@@ -283,7 +283,7 @@
     .section-header p {
       font-size: 1rem;
       color: #9ca3af;
-      max-width: 560px;
+      max-width: 640px;
       margin: 0 auto;
       line-height: 1.7;
     }
@@ -370,6 +370,143 @@
     }
 
     /* ============================================================
+       WHY CHOOSE SKILLFIELD — 2-COLUMN POINTS GRID
+    ============================================================ */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .why-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      background-color: #161b22;
+      border: 1px solid #21262d;
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .why-item::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #0ea5e9, #2563eb);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .why-item:hover {
+      transform: translateY(-3px);
+      border-color: rgba(14, 165, 233, 0.35);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(14, 165, 233, 0.1);
+    }
+
+    .why-item:hover::before {
+      transform: scaleX(1);
+    }
+
+    .why-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      border-radius: 10px;
+      background-color: rgba(14, 165, 233, 0.1);
+      border: 1px solid rgba(14, 165, 233, 0.2);
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+
+    .why-content h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #f9fafb;
+      margin-bottom: 0.35rem;
+    }
+
+    .why-content p {
+      font-size: 0.875rem;
+      color: #9ca3af;
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       CREDENTIALS / TRUST BADGES
+    ============================================================ */
+    .badges-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+
+    .badge-tile {
+      background-color: #161b22;
+      border: 1px solid #21262d;
+      border-radius: 10px;
+      padding: 1.5rem 1.25rem;
+      text-align: center;
+      transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .badge-tile:hover {
+      border-color: rgba(14, 165, 233, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .badge-title {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: #0ea5e9;
+      margin-bottom: 0.4rem;
+      line-height: 1.3;
+    }
+
+    .badge-detail {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      line-height: 1.5;
+    }
+
+    /* ============================================================
+       TESTIMONIALS
+    ============================================================ */
+    .testimonial-quote {
+      font-size: 3rem;
+      color: #0ea5e9;
+      line-height: 0.5;
+      margin-bottom: 1rem;
+      font-family: Georgia, serif;
+      display: block;
+    }
+
+    .testimonial-text {
+      font-size: 0.9375rem;
+      color: #f9fafb;
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    .testimonial-name {
+      font-size: 0.875rem;
+      color: #0ea5e9;
+      font-weight: 600;
+      margin-top: 1rem;
+      display: block;
+    }
+
+    /* ============================================================
        CTA / CONTACT SECTION
     ============================================================ */
     #contact {
@@ -400,7 +537,7 @@
     #contact p {
       font-size: 1rem;
       color: #9ca3af;
-      max-width: 480px;
+      max-width: 560px;
       margin: 0 auto 2.5rem;
       line-height: 1.7;
     }
@@ -422,6 +559,12 @@
       flex-wrap: wrap;
     }
 
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
     .footer-wordmark {
       font-size: 1rem;
       font-weight: 700;
@@ -431,6 +574,12 @@
 
     .footer-wordmark span {
       color: #0ea5e9;
+    }
+
+    .footer-tagline {
+      font-size: 0.75rem;
+      color: #9ca3af;
+      letter-spacing: 0.02em;
     }
 
     .footer-copy {
@@ -476,9 +625,19 @@
         padding: 4rem 0 3.5rem;
       }
 
-      /* Cards: single column */
+      /* Service cards: single column */
       .cards-grid {
         grid-template-columns: 1fr;
+      }
+
+      /* Why grid: single column */
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
+
+      /* Badges: 2-column on mobile */
+      .badges-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
 
       /* Footer: stack */
@@ -487,14 +646,22 @@
         text-align: center;
       }
 
+      .footer-brand {
+        align-items: center;
+      }
+
       .footer-meta {
         text-align: center;
       }
     }
 
-    /* Between 769–1024px: two column cards */
+    /* Tablet: two column cards + 2-col badges */
     @media (min-width: 769px) and (max-width: 1024px) {
       .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .badges-grid {
         grid-template-columns: repeat(2, 1fr);
       }
     }
@@ -518,8 +685,8 @@
 
         <!-- Anchor links -->
         <ul class="nav-links" role="list">
-          <li><a href="#ai">AI Managed Services</a></li>
-          <li><a href="#security">Security Managed Services</a></li>
+          <li><a href="#ai">Data &amp; AI Services</a></li>
+          <li><a href="#security">Cyber Security Services</a></li>
           <li><a href="#contact" class="nav-cta">Contact</a></li>
         </ul>
 
@@ -534,7 +701,9 @@
     <div class="container">
 
       <!-- Eyebrow pill -->
-      <div class="hero-eyebrow" aria-hidden="true">Managed Services · Melbourne, Australia</div>
+      <div class="hero-eyebrow" aria-hidden="true">
+        Cyber Security · AI · Data Services · Melbourne, Australia
+      </div>
 
       <!-- Main heading -->
       <h1 class="hero-heading" id="hero-heading">
@@ -558,70 +727,70 @@
   <hr class="section-divider" />
 
   <!-- ============================================================
-       AI MANAGED SERVICES SECTION
+       DATA & AI SERVICES SECTION
   ============================================================ -->
   <section id="ai" aria-labelledby="ai-heading">
     <div class="container">
 
       <div class="section-header">
-        <div class="section-label">AI Managed Services</div>
-        <h2 id="ai-heading">Intelligence, Delivered as a Service</h2>
+        <div class="section-label">Data &amp; AI Services</div>
+        <h2 id="ai-heading">Turn Data Into a Strategic Asset</h2>
         <p>
-          We embed AI into the operational layer of your business — monitoring, automating,
-          and surfacing insights so your team can focus on what matters most.
-          <!-- TODO: Replace with real copy -->
+          Data-powered enterprises drive greater cost savings and higher profits. Skillfield
+          simplifies data complexity and turns your data into a strategic asset through smart
+          architecture, integration, and AI-powered automation.
         </p>
       </div>
 
       <!-- 3 Feature Cards -->
       <div class="cards-grid" role="list">
 
-        <!-- Card 1: AI Monitoring -->
+        <!-- Card 1: Data Platform & Cloud -->
         <article class="card" role="listitem">
           <div class="card-icon" aria-hidden="true">
-            <!-- Inline SVG: pulse/waveform icon -->
+            <!-- Inline SVG: server/database icon -->
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
                  stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                  xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              <ellipse cx="12" cy="5" rx="9" ry="3" />
+              <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+              <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
             </svg>
           </div>
-          <h3>AI Monitoring</h3>
+          <h3>Data Platform &amp; Cloud</h3>
           <p>
-            Continuous, intelligent monitoring across your infrastructure and applications —
-            anomaly detection that learns your environment and alerts before problems escalate.
-            <!-- TODO: Replace with real copy -->
+            Design, build and administer data platforms. Migrate your data centre to the cloud
+            with confidence — we handle architecture, migration and ongoing optimisation.
           </p>
         </article>
 
-        <!-- Card 2: Intelligent Automation -->
+        <!-- Card 2: AI & Machine Learning -->
         <article class="card" role="listitem">
           <div class="card-icon" aria-hidden="true">
-            <!-- Inline SVG: cog/settings icon -->
+            <!-- Inline SVG: neural/brain network icon -->
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
                  stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                  xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <circle cx="12" cy="12" r="3" />
-              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06
-                       a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09
-                       A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83
-                       l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09
-                       A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83
-                       l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09
-                       a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83
-                       l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09
-                       a1.65 1.65 0 0 0-1.51 1z" />
+              <circle cx="12" cy="12" r="2" />
+              <circle cx="4"  cy="8"  r="2" />
+              <circle cx="20" cy="8"  r="2" />
+              <circle cx="4"  cy="16" r="2" />
+              <circle cx="20" cy="16" r="2" />
+              <line x1="6"  y1="8.5"  x2="10" y2="11" />
+              <line x1="18" y1="8.5"  x2="14" y2="11" />
+              <line x1="6"  y1="15.5" x2="10" y2="13" />
+              <line x1="18" y1="15.5" x2="14" y2="13" />
             </svg>
           </div>
-          <h3>Intelligent Automation</h3>
+          <h3>AI &amp; Machine Learning</h3>
           <p>
-            End-to-end process automation powered by AI — eliminating manual toil, reducing
-            error rates, and freeing your people to focus on higher-value work.
-            <!-- TODO: Replace with real copy -->
+            Unlock AI's potential to drive efficiency, innovation and smarter decisions. We
+            develop advanced AI and ML methods, feature stores and predictive models tailored
+            to your business.
           </p>
         </article>
 
-        <!-- Card 3: Actionable Insights -->
+        <!-- Card 3: Automation & Insights -->
         <article class="card" role="listitem">
           <div class="card-icon" aria-hidden="true">
             <!-- Inline SVG: bar-chart icon -->
@@ -634,11 +803,10 @@
               <line x1="2"  y1="20" x2="22" y2="20" />
             </svg>
           </div>
-          <h3>Actionable Insights</h3>
+          <h3>Automation &amp; Insights</h3>
           <p>
-            AI-powered dashboards and reporting that surface what matters — turning raw
-            operational data into clear, decision-ready intelligence for your leadership team.
-            <!-- TODO: Replace with real copy -->
+            Remove manual, time-consuming tasks by automating data pipelines, calculations and
+            reports. Build dashboards and visualisations that surface real business value.
           </p>
         </article>
 
@@ -649,80 +817,249 @@
   <hr class="section-divider" />
 
   <!-- ============================================================
-       SECURITY MANAGED SERVICES SECTION
+       CYBER SECURITY SERVICES SECTION
   ============================================================ -->
   <section id="security" class="section-alt" aria-labelledby="security-heading">
     <div class="container">
 
       <div class="section-header">
-        <div class="section-label">Security Managed Services</div>
-        <h2 id="security-heading">Resilient Security, Around the Clock</h2>
+        <div class="section-label">Cyber Security Services</div>
+        <h2 id="security-heading">Your Complete Cyber Security Detection &amp; Response Partner</h2>
         <p>
-          Protecting your business is not a one-time exercise. We provide ongoing,
-          expert-led security management — detection, compliance, and response as a
-          fully managed capability.
-          <!-- TODO: Replace with real copy -->
+          Cyber attacks are becoming more sophisticated and harder to detect. Skillfield follows
+          an incremental five-layer approach — customised to your real threat areas, not a
+          one-size-fits-all solution.
         </p>
       </div>
 
       <!-- 3 Feature Cards -->
       <div class="cards-grid" role="list">
 
-        <!-- Card 1: Threat Detection -->
+        <!-- Card 1: Endpoint Detection & Response -->
         <article class="card" role="listitem">
           <div class="card-icon" aria-hidden="true">
-            <!-- Inline SVG: shield icon -->
+            <!-- Inline SVG: shield / endpoint icon -->
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
                  stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                  xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              <polyline points="9 12 11 14 15 10" />
             </svg>
           </div>
-          <h3>Threat Detection</h3>
+          <h3>Endpoint Detection &amp; Response</h3>
           <p>
-            24/7 threat monitoring and real-time detection across endpoints, networks, and
-            cloud environments — powered by AI and backed by expert human analysis.
-            <!-- TODO: Replace with real copy -->
+            Proactively detect and prevent attacks across distributed environments and cloud
+            applications. EDR software that keeps you one step ahead of evolving threats.
           </p>
         </article>
 
-        <!-- Card 2: Compliance Management -->
+        <!-- Card 2: SIEM & Visibility -->
         <article class="card" role="listitem">
           <div class="card-icon" aria-hidden="true">
-            <!-- Inline SVG: clipboard/checklist icon -->
+            <!-- Inline SVG: eye / visibility icon -->
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
                  stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                  xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" />
-              <rect x="9" y="3" width="6" height="4" rx="1" ry="1" />
-              <line x1="9"  y1="12" x2="15" y2="12" />
-              <line x1="9"  y1="16" x2="12" y2="16" />
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+              <circle cx="12" cy="12" r="3" />
             </svg>
           </div>
-          <h3>Compliance Management</h3>
+          <h3>SIEM &amp; Visibility</h3>
           <p>
-            Continuous compliance monitoring against industry frameworks — ISO 27001,
-            Essential Eight, and more — so you stay audit-ready without the overhead.
-            <!-- TODO: Replace with real copy -->
+            Eliminate blind spots with a Security Information and Event Management system that
+            centralises event data in real-time for attack detection, forensics and alert reporting.
           </p>
         </article>
 
-        <!-- Card 3: Incident Response -->
+        <!-- Card 3: Security Automation (SOAR) -->
         <article class="card" role="listitem">
           <div class="card-icon" aria-hidden="true">
-            <!-- Inline SVG: alert/lightning icon -->
+            <!-- Inline SVG: lightning/bolt icon -->
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
                  stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                  xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
             </svg>
           </div>
-          <h3>Incident Response</h3>
+          <h3>Security Automation (SOAR)</h3>
           <p>
-            When it matters most, we're already moving. Rapid containment, root-cause
-            analysis, and post-incident remediation — minimising impact and downtime.
-            <!-- TODO: Replace with real copy -->
+            Increase your security team's bandwidth with SOAR — Security Orchestration,
+            Automation &amp; Response — to prioritise, standardise and accelerate incident response.
           </p>
+        </article>
+
+      </div><!-- /.cards-grid -->
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- ============================================================
+       WHY CHOOSE SKILLFIELD SECTION
+  ============================================================ -->
+  <section id="why" aria-labelledby="why-heading">
+    <div class="container">
+
+      <div class="section-header">
+        <div class="section-label">Why Skillfield</div>
+        <h2 id="why-heading">What Makes Us Different</h2>
+      </div>
+
+      <!-- 6-point 2-column grid -->
+      <div class="why-grid" role="list">
+
+        <!-- Point 1: Australian Based -->
+        <div class="why-item" role="listitem">
+          <div class="why-icon" aria-hidden="true">🇦🇺</div>
+          <div class="why-content">
+            <h3>Australian Based</h3>
+            <p>Essential for security peace of mind. Our team is local, accountable, and
+               understands the Australian regulatory landscape.</p>
+          </div>
+        </div>
+
+        <!-- Point 2: Not Recruiters -->
+        <div class="why-item" role="listitem">
+          <div class="why-icon" aria-hidden="true">🎯</div>
+          <div class="why-content">
+            <h3>Not Recruiters</h3>
+            <p>We deeply understand your business problem and deploy winning solutions.
+               No staff augmentation — just outcomes.</p>
+          </div>
+        </div>
+
+        <!-- Point 3: Deep Expertise -->
+        <div class="why-item" role="listitem">
+          <div class="why-icon" aria-hidden="true">🧠</div>
+          <div class="why-content">
+            <h3>Deep Expertise</h3>
+            <p>Big data and cyber security experts AND qualified technology specialists.
+               We cover both sides of the equation.</p>
+          </div>
+        </div>
+
+        <!-- Point 4: Genuine Partner -->
+        <div class="why-item" role="listitem">
+          <div class="why-icon" aria-hidden="true">🤝</div>
+          <div class="why-content">
+            <h3>Genuine Partner</h3>
+            <p>If we can't help, we'll recommend someone who can. Your success matters
+               more than the sale.</p>
+          </div>
+        </div>
+
+        <!-- Point 5: Unbeatable Team -->
+        <div class="why-item" role="listitem">
+          <div class="why-icon" aria-hidden="true">🏆</div>
+          <div class="why-content">
+            <h3>Unbeatable Team</h3>
+            <p>Highly trained and certified professionals with breadth and depth across
+               data, AI, and security.</p>
+          </div>
+        </div>
+
+        <!-- Point 6: End-to-End Accountability -->
+        <div class="why-item" role="listitem">
+          <div class="why-icon" aria-hidden="true">📋</div>
+          <div class="why-content">
+            <h3>End-to-End Accountability</h3>
+            <p>Dedicated project team from kick-off to delivery. Clear communication at
+               every stage.</p>
+          </div>
+        </div>
+
+      </div><!-- /.why-grid -->
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- ============================================================
+       CREDENTIALS / TRUST BADGES SECTION
+  ============================================================ -->
+  <section id="credentials" class="section-alt" aria-labelledby="credentials-heading">
+    <div class="container">
+
+      <div class="section-header">
+        <div class="section-label">Credentials</div>
+        <h2 id="credentials-heading">Trusted &amp; Certified</h2>
+      </div>
+
+      <!-- 4 Badge tiles -->
+      <div class="badges-grid" role="list">
+
+        <!-- Badge 1 -->
+        <div class="badge-tile" role="listitem">
+          <div class="badge-title">Elastic Premium Partner</div>
+          <div class="badge-detail">APAC Region · Since 2019</div>
+        </div>
+
+        <!-- Badge 2 -->
+        <div class="badge-tile" role="listitem">
+          <div class="badge-title">ISO 27001 Certified</div>
+          <div class="badge-detail">Information Security Management</div>
+        </div>
+
+        <!-- Badge 3 -->
+        <div class="badge-tile" role="listitem">
+          <div class="badge-title">AISA Corporate Partner</div>
+          <div class="badge-detail">Australian Information Security Association</div>
+        </div>
+
+        <!-- Badge 4 -->
+        <div class="badge-tile" role="listitem">
+          <div class="badge-title">Financial Times High-Growth</div>
+          <div class="badge-detail">Asia-Pacific · Two Consecutive Years</div>
+        </div>
+
+      </div><!-- /.badges-grid -->
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- ============================================================
+       TESTIMONIALS SECTION
+  ============================================================ -->
+  <section id="testimonials" aria-labelledby="testimonials-heading">
+    <div class="container">
+
+      <div class="section-header">
+        <div class="section-label">Client Testimonials</div>
+        <h2 id="testimonials-heading">What Our Clients Say</h2>
+      </div>
+
+      <!-- 3 Testimonial cards using existing .cards-grid + .card pattern -->
+      <div class="cards-grid" role="list">
+
+        <!-- Testimonial 1: Sam W. -->
+        <article class="card" role="listitem">
+          <span class="testimonial-quote" aria-hidden="true">"</span>
+          <p class="testimonial-text">
+            Working with Mouaz and his team is always a pleasure. Highly skilled, always
+            happy to help and a great member of any team.
+          </p>
+          <span class="testimonial-name">— Sam W.</span>
+        </article>
+
+        <!-- Testimonial 2: Lei Q. -->
+        <article class="card" role="listitem">
+          <span class="testimonial-quote" aria-hidden="true">"</span>
+          <p class="testimonial-text">
+            Skillfield team always deliver their service beyond our expectation. Truly
+            a trusted vendor!
+          </p>
+          <span class="testimonial-name">— Lei Q.</span>
+        </article>
+
+        <!-- Testimonial 3: Jennifer C. -->
+        <article class="card" role="listitem">
+          <span class="testimonial-quote" aria-hidden="true">"</span>
+          <p class="testimonial-text">
+            Extremely dedicated, conscientious and thorough. Well versed in their chosen
+            field and a pleasure to work alongside.
+          </p>
+          <span class="testimonial-name">— Jennifer C.</span>
         </article>
 
       </div><!-- /.cards-grid -->
@@ -737,11 +1074,10 @@
   <section id="contact" aria-labelledby="contact-heading">
     <div class="container">
 
-      <h2 id="contact-heading">Get in Touch</h2>
+      <h2 id="contact-heading">Let's Talk About How We Can Help</h2>
       <p>
-        Ready to see what intelligent, security-first managed services look like in practice?
-        We'd love to talk. Reach out and let's start the conversation.
-        <!-- TODO: Replace with real copy -->
+        Every organisation is different. Skillfield works with you to deeply understand your
+        business problem and deploy winning solutions — from cyber security to AI and data services.
       </p>
 
       <a href="mailto:hello@skillfield.com.au" class="btn-primary">
@@ -758,8 +1094,11 @@
     <div class="container">
       <div class="footer-inner">
 
-        <!-- Wordmark -->
-        <div class="footer-wordmark">Skill<span>field</span></div>
+        <!-- Brand: wordmark + tagline -->
+        <div class="footer-brand">
+          <div class="footer-wordmark">Skill<span>field</span></div>
+          <div class="footer-tagline">Cyber Security · AI · Data Services</div>
+        </div>
 
         <!-- Copyright -->
         <p class="footer-copy">© 2025 Skillfield. All rights reserved.</p>
