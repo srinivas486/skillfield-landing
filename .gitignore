@@ -1,0 +1,13 @@
+# Agent system files — never commit these
+AGENTS.md
+SOUL.md
+USER.md
+TOOLS.md
+IDENTITY.md
+HEARTBEAT.md
+MEMORY.md
+BOOTSTRAP.md
+WORKFLOW_AUTO.md
+flow.html
+*.jsonl
+.openclaw/
