@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent Interaction Flow — Skillfield Project</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0d1117;
+      color: #f9fafb;
+      min-height: 100vh;
+      padding: 2rem 1rem 4rem;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.02em;
+    }
+    .subtitle {
+      text-align: center;
+      font-size: 0.875rem;
+      color: #9ca3af;
+      margin-bottom: 3rem;
+    }
+
+    /* ── AGENT COLUMNS ── */
+    .diagram {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      max-width: 960px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .agent-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Agent header badge */
+    .agent-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.9rem 1.4rem;
+      border-radius: 12px;
+      border: 1px solid;
+      width: 170px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .agent-badge .emoji { font-size: 1.8rem; }
+    .agent-badge .name  { font-size: 0.95rem; font-weight: 700; letter-spacing: -0.01em; }
+    .agent-badge .role  { font-size: 0.7rem; color: #9ca3af; font-weight: 500; }
+
+    .badge-main     { background: #1a1f2e; border-color: #3b82f6; }
+    .badge-planner  { background: #1a1f2e; border-color: #8b5cf6; }
+    .badge-developer{ background: #1a1f2e; border-color: #10b981; }
+
+    /* Lifeline */
+    .lifeline {
+      width: 2px;
+      flex: 1;
+      min-height: 20px;
+    }
+    .line-main      { background: linear-gradient(#3b82f6, #3b82f620); }
+    .line-planner   { background: linear-gradient(#8b5cf6, #8b5cf620); }
+    .line-developer { background: linear-gradient(#10b981, #10b98120); }
+
+    /* ── EVENTS (rows that span columns) ── */
+    .events {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+
+    /* Invisible spacer to align events under headers */
+    .spacer { height: 60px; }
+
+    .event-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: start;
+      position: relative;
+      min-height: 80px;
+    }
+
+    /* Vertical lines behind events */
+    .event-row::before {
+      content: "";
+      position: absolute;
+      top: 0; bottom: 0;
+      left: calc(100% / 6);
+      width: 2px;
+      background: #3b82f630;
+      z-index: 0;
+    }
+    .event-row::after {
+      content: "";
+      position: absolute;
+      top: 0; bottom: 0;
+      left: calc(100% / 2);
+      width: 2px;
+      background: #8b5cf630;
+      z-index: 0;
+    }
+    .event-row .line-dev {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: calc(100% * 5 / 6);
+      width: 2px;
+      background: #10b98130;
+      z-index: 0;
+    }
+
+    /* A message bubble */
+    .msg {
+      position: relative;
+      z-index: 1;
+      margin: 0.6rem 0.5rem;
+      padding: 0.65rem 0.85rem;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      line-height: 1.45;
+      border-left: 3px solid;
+      cursor: default;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .msg:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    }
+
+    .msg .msg-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+      opacity: 0.7;
+    }
+    .msg .msg-text { color: #e5e7eb; }
+    .msg .msg-meta { font-size: 0.65rem; color: #6b7280; margin-top: 0.3rem; }
+
+    /* Colour themes per agent */
+    .msg-main      { background: #1a2035; border-color: #3b82f6; }
+    .msg-planner   { background: #1e1a2e; border-color: #8b5cf6; }
+    .msg-developer { background: #0f2520; border-color: #10b981; }
+    .msg-system    { background: #1a1a1a; border-color: #6b7280; }
+    .msg-done      { background: #0f2520; border-color: #34d399; }
+
+    /* Arrow connecting columns */
+    .arrow-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: center;
+      min-height: 36px;
+      position: relative;
+    }
+
+    .arrow {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      font-size: 0.7rem;
+      font-weight: 600;
+      z-index: 2;
+    }
+
+    .arrow-line {
+      height: 2px;
+      flex: 1;
+    }
+
+    .arrow-head { font-size: 1rem; line-height: 1; }
+
+    /* Presets for arrow positions */
+    .arr-m-to-p  { left: calc(100%/6 - 1px); width: calc(100%/3 + 2px); color: #8b5cf6; }
+    .arr-m-to-p  .arrow-line { background: #8b5cf6; }
+
+    .arr-p-to-d  { left: calc(100%/2 - 1px); width: calc(100%/3 + 2px); color: #10b981; }
+    .arr-p-to-d  .arrow-line { background: #10b981; }
+
+    .arr-d-to-p  { left: calc(100%/2 - 1px); width: calc(100%/3 + 2px); color: #10b981; flex-direction: row-reverse; }
+    .arr-d-to-p  .arrow-line { background: #10b981; }
+
+    .arr-p-to-m  { left: calc(100%/6 - 1px); width: calc(100%/3 + 2px); color: #8b5cf6; flex-direction: row-reverse; }
+    .arr-p-to-m  .arrow-line { background: #8b5cf6; }
+
+    .arr-m-to-u  { left: 0; width: calc(100%/6); color: #3b82f6; flex-direction: row-reverse; }
+    .arr-m-to-u  .arrow-line { background: #3b82f6; }
+
+    .arr-label {
+      font-size: 0.6rem;
+      padding: 0 0.3rem;
+      white-space: nowrap;
+      background: #0d1117;
+    }
+
+    /* Phase separator */
+    .phase {
+      max-width: 960px;
+      margin: 1.2rem auto 0.2rem;
+      padding: 0.35rem 1rem;
+      background: #161b22;
+      border: 1px solid #21262d;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      text-align: center;
+    }
+
+    /* Legend */
+    .legend {
+      max-width: 960px;
+      margin: 3rem auto 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+    .legend-item { display: flex; align-items: center; gap: 0.4rem; }
+    .legend-dot  { width: 10px; height: 10px; border-radius: 50%; }
+
+    /* Summary box */
+    .summary {
+      max-width: 960px;
+      margin: 2rem auto 0;
+      background: #161b22;
+      border: 1px solid #21262d;
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+    }
+    .summary h2 { font-size: 1rem; margin-bottom: 1rem; color: #f9fafb; }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .summary-card {
+      background: #0d1117;
+      border-radius: 8px;
+      padding: 1rem;
+      border-top: 3px solid;
+    }
+    .summary-card h3 { font-size: 0.8rem; margin-bottom: 0.5rem; }
+    .summary-card ul { font-size: 0.75rem; color: #9ca3af; padding-left: 1rem; line-height: 1.7; }
+    .card-main      { border-color: #3b82f6; }
+    .card-planner   { border-color: #8b5cf6; }
+    .card-developer { border-color: #10b981; }
+
+    @media (max-width: 640px) {
+      .summary-grid { grid-template-columns: 1fr; }
+      .diagram      { grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+      .agent-badge  { width: 100px; padding: 0.6rem 0.5rem; }
+      .agent-badge .name { font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<h1>🤖 Agent Interaction — Skillfield Project</h1>
+<p class="subtitle">How Main, Planner (Orion), and Developer worked together to build the Skillfield landing page</p>
+
+<!-- AGENT COLUMN HEADERS -->
+<div class="diagram">
+  <div class="agent-col">
+    <div class="agent-badge badge-main">
+      <span class="emoji">🧠</span>
+      <span class="name">Main</span>
+      <span class="role">Orchestrator<br>Talks to Vasu</span>
+    </div>
+  </div>
+  <div class="agent-col">
+    <div class="agent-badge badge-planner">
+      <span class="emoji">🗂️</span>
+      <span class="name">Planner (Orion)</span>
+      <span class="role">Breaks down projects<br>Manages tasks</span>
+    </div>
+  </div>
+  <div class="agent-col">
+    <div class="agent-badge badge-developer">
+      <span class="emoji">⚙️</span>
+      <span class="name">Developer</span>
+      <span class="role">Writes code<br>Delivers files</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<div class="phase">① Vasu Makes a Request</div>
+
+<div class="events">
+
+  <!-- Row: Vasu → Main -->
+  <div class="event-row">
+    <div class="line-dev"></div>
+    <div class="msg msg-main" style="margin-top:1rem">
+      <div class="msg-label">👤 Vasu → Main</div>
+      <div class="msg-text">"I want to build a quick HTML webpage with dark colors about Skillfield — AI managed services and security managed services"</div>
+      <div class="msg-meta">WhatsApp DM → Main agent</div>
+    </div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <!-- Arrow: Main → Planner -->
+  <div class="arrow-row">
+    <div class="line-dev"></div>
+    <div class="arrow arr-m-to-p">
+      <div class="arrow-line"></div>
+      <span class="arr-label">routes to planner</span>
+      <div class="arrow-line"></div>
+      <span class="arrow-head">▶</span>
+    </div>
+  </div>
+
+  <!-- Row: Main sends to Planner -->
+  <div class="event-row">
+    <div class="line-dev"></div>
+    <div></div>
+    <div class="msg msg-planner">
+      <div class="msg-label">🧠 Main → Planner</div>
+      <div class="msg-text">Vasu wants a dark-theme HTML page for Skillfield. AI + Security sections. Single file, quick. Please break it down into Epics → Stories → Tasks.</div>
+      <div class="msg-meta">sessions_send → agent:planner:main</div>
+    </div>
+    <div></div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<div class="phase">② Planner Breaks It Down</div>
+
+<div class="events">
+  <div class="event-row">
+    <div class="line-dev"></div>
+    <div></div>
+    <div class="msg msg-planner">
+      <div class="msg-label">🗂️ Planner Thinking</div>
+      <div class="msg-text">Creates plan: 1 Epic · 4 Stories · ~14 Tasks<br>
+        Story 1: Page Shell &amp; Brand<br>
+        Story 2: AI Managed Services section<br>
+        Story 3: Security Managed Services section<br>
+        Story 4: Polish &amp; CTA
+      </div>
+      <div class="msg-meta">Internal — writing BACKLOG.md</div>
+    </div>
+    <div></div>
+  </div>
+
+  <!-- Arrow: Planner → Main (plan for approval) -->
+  <div class="arrow-row">
+    <div class="line-dev"></div>
+    <div class="arrow arr-p-to-m">
+      <span class="arrow-head">◀</span>
+      <div class="arrow-line"></div>
+      <span class="arr-label">sends plan for approval</span>
+      <div class="arrow-line"></div>
+    </div>
+  </div>
+
+  <div class="event-row">
+    <div class="line-dev"></div>
+    <div class="msg msg-main">
+      <div class="msg-label">🗂️ Planner → Main</div>
+      <div class="msg-text">Full plan ready. 1 Epic, 4 Stories, ~14 Tasks. Dark palette, single HTML file, no deps. 3 optional questions for Vasu (colours, mobile menu, contact).</div>
+      <div class="msg-meta">Waiting for Vasu's approval before developer gets anything</div>
+    </div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <!-- Arrow: Main → Vasu -->
+  <div class="arrow-row">
+    <div class="line-dev"></div>
+    <div class="arrow arr-m-to-u">
+      <span class="arrow-head">◀</span>
+      <div class="arrow-line"></div>
+      <span class="arr-label">shows plan</span>
+    </div>
+  </div>
+
+  <div class="event-row">
+    <div class="line-dev"></div>
+    <div class="msg msg-system">
+      <div class="msg-label">🧠 Main → Vasu</div>
+      <div class="msg-text">Here's the plan from Orion — 4 stories. Approve to proceed, or want changes? (3 optional questions)</div>
+      <div class="msg-meta">WhatsApp reply → Vasu</div>
+    </div>
+    <div></div>
+    <div></div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<div class="phase">③ Vasu Approves → Planner Dispatches to Developer</div>
+
+<div class="events">
+
+  <div class="event-row">
+    <div class="line-dev"></div>
+    <div class="msg msg-main" style="margin-top:0.8rem">
+      <div class="msg-label">👤 Vasu → Main</div>
+      <div class="msg-text">"Let's develop a prototype HTML"</div>
+      <div class="msg-meta">✅ Approval given</div>
+    </div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <!-- Arrow: Main → Planner (approval) -->
+  <div class="arrow-row">
+    <div class="line-dev"></div>
+    <div class="arrow arr-m-to-p">
+      <div class="arrow-line"></div>
+      <span class="arr-label">approval confirmed</span>
+      <div class="arrow-line"></div>
+      <span class="arrow-head">▶</span>
+    </div>
+  </div>
+
+  <div class="event-row">
+    <div class="line-dev"></div>
+    <div></div>
+    <div class="msg msg-planner">
+      <div class="msg-label">🧠 Main → Planner</div>
+      <div class="msg-text">Vasu approved. Use defaults: dark navy palette, stacked mobile layout, placeholder contact. Go ahead — send full task to developer.</div>
+      <div class="msg-meta">sessions_send → agent:planner:main</div>
+    </div>
+    <div></div>
+  </div>
+
+  <!-- Arrow: Planner → Developer -->
+  <div class="arrow-row">
+    <div class="line-dev"></div>
+    <div class="arrow arr-p-to-d">
+      <div class="arrow-line"></div>
+      <span class="arr-label">TASK ASSIGNMENT</span>
+      <div class="arrow-line"></div>
+      <span class="arrow-head">▶</span>
+    </div>
+  </div>
+
+  <div class="event-row">
+    <div class="line-dev"></div>
+    <div></div>
+    <div></div>
+    <div class="msg msg-developer">
+      <div class="msg-label">🗂️ Planner → Developer</div>
+      <div class="msg-text">
+        TASK ASSIGNMENT<br>
+        Project: Skillfield Landing Page<br>
+        Build: single index.html, dark palette, sticky nav, hero, AI section (3 cards), Security section (3 cards), CTA, footer. Mobile-responsive. No JS. No external deps.
+      </div>
+      <div class="msg-meta">sessions_send → agent:developer:main</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<div class="phase">④ Developer Builds the Page</div>
+
+<div class="events">
+
+  <div class="event-row">
+    <div class="line-dev"></div>
+    <div></div>
+    <div></div>
+    <div class="msg msg-developer" style="margin-top:0.8rem">
+      <div class="msg-label">⚙️ Developer Working</div>
+      <div class="msg-text">
+        ✓ Acknowledged task<br>
+        ✓ Wrote 778-line index.html<br>
+        ✓ Dark theme: #0d1117 bg · #0ea5e9 accent<br>
+        ✓ Inline SVG icons, zero deps<br>
+        ✓ Sticky nav, hero, 6 cards, CTA, footer<br>
+        ✓ Responsive grid (3-col→2-col→1-col)<br>
+        ✓ git commit ac49403
+      </div>
+      <div class="msg-meta">Wrote file → verified → committed</div>
+    </div>
+  </div>
+
+  <!-- Arrow: Developer → Planner (done) -->
+  <div class="arrow-row">
+    <div class="line-dev"></div>
+    <div class="arrow arr-d-to-p">
+      <span class="arrow-head">◀</span>
+      <div class="arrow-line"></div>
+      <span class="arr-label">TASK COMPLETE</span>
+      <div class="arrow-line"></div>
+    </div>
+  </div>
+
+  <div class="event-row">
+    <div class="line-dev"></div>
+    <div></div>
+    <div class="msg msg-done">
+      <div class="msg-label">⚙️ Developer → Planner</div>
+      <div class="msg-text">
+        TASK COMPLETE ✅<br>
+        778 lines · zero deps · all 9 acceptance criteria met<br>
+        File: /workspace-developer/index.html<br>
+        Commit: ac49403
+      </div>
+      <div class="msg-meta">sessions_send → agent:planner:main</div>
+    </div>
+    <div></div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<div class="phase">⑤ Planner Verifies → Main Reports to Vasu</div>
+
+<div class="events">
+
+  <div class="event-row">
+    <div class="line-dev"></div>
+    <div></div>
+    <div class="msg msg-planner" style="margin-top:0.8rem">
+      <div class="msg-label">🗂️ Planner Verifying</div>
+      <div class="msg-text">Checked all acceptance criteria. All 9 items met. Updated BACKLOG.md → all tasks [x] done. Updated DONE.md.</div>
+      <div class="msg-meta">Updating project files: memory/projects/skillfield/</div>
+    </div>
+    <div></div>
+  </div>
+
+  <!-- Arrow: Planner → Main -->
+  <div class="arrow-row">
+    <div class="line-dev"></div>
+    <div class="arrow arr-p-to-m">
+      <span class="arrow-head">◀</span>
+      <div class="arrow-line"></div>
+      <span class="arr-label">project complete</span>
+      <div class="arrow-line"></div>
+    </div>
+  </div>
+
+  <div class="event-row">
+    <div class="line-dev"></div>
+    <div class="msg msg-main">
+      <div class="msg-label">🗂️ Planner → Main</div>
+      <div class="msg-text">Skillfield page DONE ✅ — 778 lines, all criteria met, committed at ac49403. Ready for Vasu.</div>
+      <div class="msg-meta">sessions_send → agent:main:main</div>
+    </div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <!-- Arrow: Main → Vasu -->
+  <div class="arrow-row">
+    <div class="line-dev"></div>
+    <div class="arrow arr-m-to-u">
+      <span class="arrow-head">◀</span>
+      <div class="arrow-line"></div>
+      <span class="arr-label">delivery</span>
+    </div>
+  </div>
+
+  <div class="event-row">
+    <div class="line-dev"></div>
+    <div class="msg msg-done">
+      <div class="msg-label">🧠 Main → Vasu</div>
+      <div class="msg-text">It's done! ✅ 778-line index.html — dark theme, sticky nav, AI + Security sections, responsive. Preview at http://192.168.41.9:8099/</div>
+      <div class="msg-meta">WhatsApp reply → Vasu 🎉</div>
+    </div>
+    <div></div>
+    <div></div>
+  </div>
+
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div> Main agent messages</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6"></div> Planner (Orion) messages</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#10b981"></div> Developer messages</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#6b7280"></div> System / Vasu messages</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#34d399"></div> Completion events</div>
+</div>
+
+<!-- SUMMARY CARDS -->
+<div class="summary">
+  <h2>Agent Roles — What Each One Does</h2>
+  <div class="summary-grid">
+    <div class="summary-card card-main">
+      <h3>🧠 Main Agent</h3>
+      <ul>
+        <li>Only agent that talks to Vasu</li>
+        <li>Routes dev requests to Planner</li>
+        <li>Presents plans for approval</li>
+        <li>Relays approval/rejection</li>
+        <li>Reports final status</li>
+        <li>Handles non-dev questions directly</li>
+      </ul>
+    </div>
+    <div class="summary-card card-planner">
+      <h3>🗂️ Planner (Orion)</h3>
+      <ul>
+        <li>Receives requests from Main only</li>
+        <li>Breaks projects into Epics → Stories → Tasks</li>
+        <li>Waits for approval before dispatching</li>
+        <li>Sends structured TASK ASSIGNMENTs to Developer</li>
+        <li>Tracks project state in memory files</li>
+        <li>Verifies completed work</li>
+      </ul>
+    </div>
+    <div class="summary-card card-developer">
+      <h3>⚙️ Developer</h3>
+      <ul>
+        <li>Receives tasks from Planner only</li>
+        <li>Acknowledges task immediately</li>
+        <li>Writes the code / creates files</li>
+        <li>Commits to git</li>
+        <li>Reports TASK COMPLETE to Planner</li>
+        <li>Never contacts Vasu directly</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
