@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ title }}</title>
+  {% if description %}<meta name="description" content="{{ description }}" />{% endif %}
+  <link rel="icon" type="image/png" href="{{ favicon }}">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav aria-label="Main navigation">
+    <div class="container">
+      <div class="nav-inner">
+
+        <a href="#hero" class="nav-wordmark" aria-label="{{ nav.logo_alt }} home">
+          <img src="{{ nav.logo_url }}"
+               alt="{{ nav.logo_alt }}"
+               height="40"
+               width="auto"
+               style="display: block; height: 40px; width: auto;">
+        </a>
+
+        <ul class="nav-links" role="list">
+          {% for link in nav.links %}
+          <li>
+            <a href="{{ link.href }}"{% if link.cta %} class="nav-cta"{% endif %}>
+              {{ link.text }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero" aria-labelledby="hero-heading">
+    <div class="container">
+
+      <div class="hero-eyebrow" aria-hidden="true">
+        {{ hero.eyebrow }}
+      </div>
+
+      <h1 class="hero-heading" id="hero-heading">
+        <span class="accent">{{ hero.heading }}</span>
+      </h1>
+
+      <p class="hero-tagline">{{ hero.tagline }}</p>
+
+      <div class="hero-cta-group">
+        {% for btn in hero.buttons %}
+        <a href="{{ btn.href }}" class="{% if btn.primary %}btn-primary{% else %}btn-ghost{% endif %}">
+          {{ btn.text }}
+        </a>
+        {% endfor %}
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- DATA & AI SERVICES -->
+  <section id="{{ ai_services.id }}" aria-labelledby="ai-heading">
+    <div class="container">
+
+      <div class="section-header">
+        <div class="section-label">{{ ai_services.label }}</div>
+        <h2 id="ai-heading">{{ ai_services.heading }}</h2>
+        <p>{{ ai_services.description }}</p>
+      </div>
+
+      <div class="cards-grid" role="list">
+        {% for card in ai_services.cards %}
+        <article class="card" role="listitem">
+          <div class="card-icon" aria-hidden="true">
+            {{ icons[card.icon] | safe }}
+          </div>
+          <h3>{{ card.title }}</h3>
+          <p>{{ card.text }}</p>
+        </article>
+        {% endfor %}
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- CYBER SECURITY SERVICES -->
+  <section id="{{ security_services.id }}" class="section-alt" aria-labelledby="security-heading">
+    <div class="container">
+
+      <div class="section-header">
+        <div class="section-label">{{ security_services.label }}</div>
+        <h2 id="security-heading">{{ security_services.heading }}</h2>
+        <p>{{ security_services.description }}</p>
+      </div>
+
+      <div class="cards-grid" role="list">
+        {% for card in security_services.cards %}
+        <article class="card" role="listitem">
+          <div class="card-icon" aria-hidden="true">
+            {{ icons[card.icon] | safe }}
+          </div>
+          <h3>{{ card.title }}</h3>
+          <p>{{ card.text }}</p>
+        </article>
+        {% endfor %}
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- WHY SKILLFIELD -->
+  <section id="{{ why.id }}" aria-labelledby="why-heading">
+    <div class="container">
+
+      <div class="section-header">
+        <div class="section-label">{{ why.label }}</div>
+        <h2 id="why-heading">{{ why.heading }}</h2>
+      </div>
+
+      <div class="why-grid" role="list">
+        {% for item in why.items %}
+        <div class="why-item" role="listitem">
+          <div class="why-icon" aria-hidden="true">{{ item.icon }}</div>
+          <div class="why-content">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.text }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- CREDENTIALS -->
+  <section id="{{ credentials.id }}" class="section-alt" aria-labelledby="credentials-heading">
+    <div class="container">
+
+      <div class="section-header">
+        <div class="section-label">{{ credentials.label }}</div>
+        <h2 id="credentials-heading">{{ credentials.heading }}</h2>
+      </div>
+
+      <div class="badges-grid" role="list">
+        {% for badge in credentials.badges %}
+        <div class="badge-tile" role="listitem">
+          <div class="badge-title">{{ badge.title }}</div>
+          <div class="badge-detail">{{ badge.detail }}</div>
+        </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- TESTIMONIALS -->
+  <section id="{{ testimonials.id }}" aria-labelledby="testimonials-heading">
+    <div class="container">
+
+      <div class="section-header">
+        <div class="section-label">{{ testimonials.label }}</div>
+        <h2 id="testimonials-heading">{{ testimonials.heading }}</h2>
+      </div>
+
+      <div class="cards-grid" role="list">
+        {% for item in testimonials.items %}
+        <article class="card" role="listitem">
+          <span class="testimonial-quote" aria-hidden="true">"</span>
+          <p class="testimonial-text">{{ item.quote }}</p>
+          <span class="testimonial-name">— {{ item.name }}</span>
+        </article>
+        {% endfor %}
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- CONTACT -->
+  <section id="{{ contact.id }}" aria-labelledby="contact-heading">
+    <div class="container">
+
+      <h2 id="contact-heading">{{ contact.heading }}</h2>
+      <p>{{ contact.description }}</p>
+
+      <a href="mailto:{{ contact.email }}" class="btn-primary">
+        {{ contact.email }}
+      </a>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+
+        <div class="footer-brand">
+          <div class="footer-wordmark">
+            <img src="{{ footer.logo_url }}"
+                 alt="{{ footer.logo_alt }}"
+                 style="display: block; height: 36px; width: auto; margin-bottom: 4px;">
+          </div>
+          <div class="footer-tagline">{{ footer.tagline }}</div>
+        </div>
+
+        <p class="footer-copy">{{ footer.copyright }}</p>
+
+        <div class="footer-meta">
+          {{ footer.location }} ·
+          <a href="mailto:{{ footer.email }}">{{ footer.email }}</a>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
