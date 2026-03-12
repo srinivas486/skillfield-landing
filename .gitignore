@@ -11,3 +11,9 @@ WORKFLOW_AUTO.md
 flow.html
 *.jsonl
 .openclaw/
+
+# Build output
+dist/
+
+# Dependencies
+node_modules/

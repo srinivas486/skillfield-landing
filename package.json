@@ -1,0 +1,13 @@
+{
+  "name": "skillfield-landing",
+  "version": "1.0.0",
+  "description": "Skillfield landing page — markdown-driven static site generator",
+  "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve",
+    "dev": "eleventy --serve --watch"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  }
+}
