@@ -46,4 +46,4 @@ AI and data projects need clear metrics from the start. We help clients define:
 - **Technical metrics** — Model accuracy, latency, data freshness
 - **Operational metrics** — Pipeline reliability, data quality scores
 
-Interested in developing an AI and data strategy for your organisation? [Contact the Skillfield team](/#contact).
+Interested in developing an AI and data strategy for your organisation? [Contact the Skillfield team](../../#contact).

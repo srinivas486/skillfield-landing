@@ -42,4 +42,4 @@ At Skillfield, we help organisations implement Zero Trust architectures that are
 
 Zero Trust is a journey, not a destination. The key is to start with your most critical assets and highest-risk areas, then expand coverage incrementally.
 
-Ready to explore how Zero Trust fits your organisation? [Get in touch with the Skillfield team](/#contact).
+Ready to explore how Zero Trust fits your organisation? [Get in touch with the Skillfield team](../../#contact).

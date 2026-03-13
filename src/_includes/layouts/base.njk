@@ -6,7 +6,7 @@
   <title>{{ title }}</title>
   {% if description %}<meta name="description" content="{{ description }}" />{% endif %}
   <link rel="icon" type="image/png" href="{{ site.favicon }}">
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | url }}">
 </head>
 
 <body>
@@ -16,7 +16,7 @@
     <div class="container">
       <div class="nav-inner">
 
-        <a href="/" class="nav-wordmark" aria-label="{{ site.logo_alt }} home">
+        <a href="{{ '/' | url }}" class="nav-wordmark" aria-label="{{ site.logo_alt }} home">
           <img src="{{ site.logo_url }}"
                alt="{{ site.logo_alt }}"
                height="40"
@@ -28,7 +28,7 @@
           {% for link in site.nav %}
           <li>
             {% set isActive = (link.href == page.url) or (link.href != "/" and (page.url | urlStartsWith(link.href))) %}
-            <a href="{{ link.href }}"{% if link.cta %} class="nav-cta"{% endif %}{% if isActive %} aria-current="page"{% endif %}>{{ link.text }}</a>
+            <a href="{{ link.href | url }}"{% if link.cta %} class="nav-cta"{% endif %}{% if isActive %} aria-current="page"{% endif %}>{{ link.text }}</a>
           </li>
           {% endfor %}
         </ul>

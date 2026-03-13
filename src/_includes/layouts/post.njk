@@ -6,9 +6,9 @@ layout: layouts/base.njk
   <div class="container">
 
     <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="/">Home</a>
+      <a href="{{ '/' | url }}">Home</a>
       <span aria-hidden="true">›</span>
-      <a href="/blog/">Blog</a>
+      <a href="{{ '/blog/' | url }}">Blog</a>
       <span aria-hidden="true">›</span>
       <span>{{ title }}</span>
     </nav>
@@ -33,7 +33,7 @@ layout: layouts/base.njk
     </div>
 
     <div class="post-footer-nav">
-      <a href="/blog/" class="btn-ghost">← Back to Blog</a>
+      <a href="{{ '/blog/' | url }}" class="btn-ghost">← Back to Blog</a>
     </div>
 
   </div>
