@@ -26,12 +26,12 @@ description: "Insights on Cyber Security, AI and Data Services from the Skillfie
           {% endfor %}
         </div>
         <h2 class="blog-card-title">
-          <a href="{{ post.url }}">{{ post.data.title }}</a>
+          <a href="{{ post.url | url }}">{{ post.data.title }}</a>
         </h2>
         {% if post.data.description %}
           <p class="blog-card-excerpt">{{ post.data.description }}</p>
         {% endif %}
-        <a href="{{ post.url }}" class="blog-card-readmore">Read article →</a>
+        <a href="{{ post.url | url }}" class="blog-card-readmore">Read article →</a>
       </article>
       {% endfor %}
     </div>

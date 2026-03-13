@@ -6,7 +6,7 @@
   <title>{{ title }}</title>
   {% if description %}<meta name="description" content="{{ description }}" />{% endif %}
   <link rel="icon" type="image/png" href="{{ favicon }}">
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | url }}">
 </head>
 
 <body>
@@ -27,7 +27,7 @@
         <ul class="nav-links" role="list">
           {% for link in nav.links %}
           <li>
-            <a href="{{ link.href }}"{% if link.cta %} class="nav-cta"{% endif %}>
+            <a href="{{ link.href | url }}"{% if link.cta %} class="nav-cta"{% endif %}>
               {{ link.text }}
             </a>
           </li>
