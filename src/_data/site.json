@@ -1,0 +1,18 @@
+{
+  "logo_url": "https://skillfield.com.au/wp-content/uploads/2022/05/LogoSkillfield-Logo-WHT120W.png",
+  "logo_alt": "Skillfield",
+  "favicon": "https://skillfield.com.au/wp-content/uploads/2022/05/Skillfield-Logo-FULLFAV32.png",
+  "nav": [
+    { "text": "Data & AI Services", "href": "/#ai" },
+    { "text": "Cyber Security Services", "href": "/#security" },
+    { "text": "Blog", "href": "/blog/" },
+    { "text": "Contact", "href": "/#contact", "cta": true }
+  ],
+  "footer": {
+    "logo_url": "https://skillfield.com.au/wp-content/uploads/2022/05/LogoSkillfield-Logo-WHTHQ.png",
+    "tagline": "Cyber Security · AI · Data Services",
+    "copyright": "© 2026 Skillfield. All rights reserved.",
+    "location": "Melbourne, Australia",
+    "email": "info@skillfield.com.au"
+  }
+}

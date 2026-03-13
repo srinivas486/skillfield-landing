@@ -1,0 +1,43 @@
+---
+layout: layouts/base.njk
+title: "Blog — Skillfield"
+description: "Insights on Cyber Security, AI and Data Services from the Skillfield team."
+---
+
+<section class="blog-listing">
+  <div class="container">
+
+    <div class="section-header blog-page-header">
+      <div class="section-label">Insights</div>
+      <h1>Blog</h1>
+      <p>Perspectives on Cyber Security, AI and Data Services from the Skillfield team.</p>
+    </div>
+
+    {% if collections.posts.length %}
+    <div class="blog-grid">
+      {% for post in collections.posts %}
+      <article class="blog-card">
+        <div class="blog-card-meta">
+          <time datetime="{{ post.date | htmlDate }}">{{ post.date | readableDate }}</time>
+          {% for tag in post.data.tags %}
+            {% if tag != "post" %}
+              <span class="post-tag">{{ tag }}</span>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <h2 class="blog-card-title">
+          <a href="{{ post.url }}">{{ post.data.title }}</a>
+        </h2>
+        {% if post.data.description %}
+          <p class="blog-card-excerpt">{{ post.data.description }}</p>
+        {% endif %}
+        <a href="{{ post.url }}" class="blog-card-readmore">Read article →</a>
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="blog-empty">No posts yet. Check back soon!</p>
+    {% endif %}
+
+  </div>
+</section>

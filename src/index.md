@@ -12,6 +12,8 @@ nav:
       href: "#ai"
     - text: "Cyber Security Services"
       href: "#security"
+    - text: "Blog"
+      href: "/blog/"
     - text: "Contact"
       href: "#contact"
       cta: true
