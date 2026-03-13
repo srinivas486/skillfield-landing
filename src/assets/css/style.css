@@ -753,6 +753,11 @@ footer {
   padding: 3rem 0;
 }
 
+.blog-preview-footer {
+  margin-top: 2rem;
+  text-align: center;
+}
+
 /* ============================================================
    BLOG — INDIVIDUAL POST PAGE
 ============================================================ */
