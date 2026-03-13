@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ title }}</title>
+  {% if description %}<meta name="description" content="{{ description }}" />{% endif %}
+  <link rel="icon" type="image/png" href="{{ site.favicon }}">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav aria-label="Main navigation">
+    <div class="container">
+      <div class="nav-inner">
+
+        <a href="/" class="nav-wordmark" aria-label="{{ site.logo_alt }} home">
+          <img src="{{ site.logo_url }}"
+               alt="{{ site.logo_alt }}"
+               height="40"
+               width="auto"
+               style="display: block; height: 40px; width: auto;">
+        </a>
+
+        <ul class="nav-links" role="list">
+          {% for link in site.nav %}
+          <li>
+            {% set isActive = (link.href == page.url) or (link.href != "/" and (page.url | urlStartsWith(link.href))) %}
+            <a href="{{ link.href }}"{% if link.cta %} class="nav-cta"{% endif %}{% if isActive %} aria-current="page"{% endif %}>{{ link.text }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+
+  {{ content | safe }}
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+
+        <div class="footer-brand">
+          <div class="footer-wordmark">
+            <img src="{{ site.footer.logo_url }}"
+                 alt="{{ site.logo_alt }}"
+                 style="display: block; height: 36px; width: auto; margin-bottom: 4px;">
+          </div>
+          <div class="footer-tagline">{{ site.footer.tagline }}</div>
+        </div>
+
+        <p class="footer-copy">{{ site.footer.copyright }}</p>
+
+        <div class="footer-meta">
+          {{ site.footer.location }} ·
+          <a href="mailto:{{ site.footer.email }}">{{ site.footer.email }}</a>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

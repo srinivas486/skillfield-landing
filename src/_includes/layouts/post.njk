@@ -1,0 +1,40 @@
+---
+layout: layouts/base.njk
+---
+
+<article class="post-page">
+  <div class="container">
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true">›</span>
+      <a href="/blog/">Blog</a>
+      <span aria-hidden="true">›</span>
+      <span>{{ title }}</span>
+    </nav>
+
+    <header class="post-header">
+      <div class="post-meta">
+        <time datetime="{{ date | htmlDate }}">{{ date | readableDate }}</time>
+        {% for tag in tags %}
+          {% if tag != "post" %}
+            <span class="post-tag">{{ tag }}</span>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <h1>{{ title }}</h1>
+      {% if description %}
+        <p class="post-description">{{ description }}</p>
+      {% endif %}
+    </header>
+
+    <div class="post-content">
+      {{ content | safe }}
+    </div>
+
+    <div class="post-footer-nav">
+      <a href="/blog/" class="btn-ghost">← Back to Blog</a>
+    </div>
+
+  </div>
+</article>
