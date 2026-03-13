@@ -31,6 +31,7 @@ module.exports = function (eleventyConfig) {
   );
 
   return {
+    pathPrefix: "/skillfield-landing/",
     dir: {
       input: "src",
       output: "dist",
