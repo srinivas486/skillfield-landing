@@ -1,9 +1,20 @@
+import Link from "next/link";
+
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
-import { getHomePageData, getSafeIconSvg, safeHref } from "../lib/content";
+import {
+  dateForDateTime,
+  formatDate,
+  getBlogPosts,
+  getHomePageData,
+  getPostTags,
+  getSafeIconSvg,
+  safeHref,
+} from "../lib/content";
 
 export default function HomePage() {
   const data = getHomePageData();
+  const recentPosts = getBlogPosts().slice(0, 3);
 
   return (
     <>
@@ -141,6 +152,45 @@ export default function HomePage() {
                 <div className="badge-detail">{badge.detail}</div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <hr className="section-divider" />
+
+      <section id={data.blog_preview.id} aria-labelledby="blog-preview-heading">
+        <div className="container">
+          <div className="section-header">
+            <div className="section-label">{data.blog_preview.label}</div>
+            <h2 id="blog-preview-heading">{data.blog_preview.heading}</h2>
+          </div>
+
+          <div className="blog-grid">
+            {recentPosts.map((post) => (
+              <article className="blog-card" key={post.slug}>
+                <div className="blog-card-meta">
+                  <time dateTime={dateForDateTime(post.date)}>{formatDate(post.date)}</time>
+                  {getPostTags(post.tags).map((tag) => (
+                    <span className="post-tag" key={`${post.slug}-${tag}`}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <h3 className="blog-card-title">
+                  <Link href={`/blog/${post.slug}/`}>{post.title}</Link>
+                </h3>
+                {post.description ? <p className="blog-card-excerpt">{post.description}</p> : null}
+                <Link href={`/blog/${post.slug}/`} className="blog-card-readmore">
+                  Read article -&gt;
+                </Link>
+              </article>
+            ))}
+          </div>
+
+          <div className="blog-preview-footer">
+            <Link href={safeHref(data.blog_preview.view_all_href)} className="btn-ghost">
+              {data.blog_preview.view_all_text}
+            </Link>
           </div>
         </div>
       </section>

@@ -131,6 +131,13 @@ credentials:
     - title: "Financial Times High-Growth"
       detail: "Asia-Pacific · Two Consecutive Years"
 
+blog_preview:
+  id: "blog"
+  label: "Insights"
+  heading: "Latest from the Blog"
+  view_all_text: "View all posts"
+  view_all_href: "/blog/"
+
 testimonials:
   id: "testimonials"
   label: "Client Testimonials"
