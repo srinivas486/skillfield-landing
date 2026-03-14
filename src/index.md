@@ -147,6 +147,20 @@ testimonials:
         Skillfield team always deliver their service beyond our expectation. Truly
         a trusted vendor!
       name: "Lei Q."
+    - quote: >-
+        Their cybersecurity expertise is second to none. Skillfield helped us identify
+        and remediate critical vulnerabilities in our infrastructure with speed and
+        professionalism.
+      name: "David M."
+    - quote: >-
+        Working with Skillfield on our AI and data transformation was a game-changer.
+        They understood our business needs and delivered a solution that exceeded
+        expectations.
+      name: "Sarah T."
+    - quote: >-
+        Skillfield provided outstanding support throughout our cloud migration. Their
+        team was responsive, knowledgeable, and a pleasure to work with.
+      name: "James R."
 
 contact:
   id: "contact"
