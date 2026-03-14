@@ -1,11 +1,9 @@
-name: Build & Deploy to GitHub Pages
+name: Deploy to GitHub Pages (Production)
 
 on:
   push:
     branches:
       - main
-  release:
-    types: [published]
   workflow_dispatch:
 
 permissions:

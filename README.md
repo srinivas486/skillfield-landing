@@ -57,6 +57,31 @@ npm run build
 npm run start
 ```
 
+## Branching Strategy
+
+This repository follows a two-branch workflow:
+
+| Branch | Purpose |
+|--------|---------|
+| `dev`  | Active development branch. All PRs must target `dev`. |
+| `main` | Production branch. Only receives merges from `dev` after review. |
+
+### Workflow
+
+1. **Create a feature branch** from `dev`.
+2. **Open a Pull Request** targeting `dev`.
+3. CI runs automatically (`ci.yml`) to validate the build on every push to `dev` and every PR targeting `dev`.
+4. After review and approval, **merge the PR into `dev`**.
+5. When the `dev` GitHub Pages preview looks good, **open a PR from `dev` → `main`** to promote to production.
+6. Merging into `main` triggers the production deployment workflow (`deploy.yml`) and updates the live GitHub Pages site.
+
+### GitHub Actions
+
+| Workflow | Trigger | Purpose |
+|----------|---------|---------|
+| `ci.yml` | Push to `dev`, PRs targeting `dev` | Build validation |
+| `deploy.yml` | Push to `main`, manual dispatch | Deploy to GitHub Pages (production) |
+
 ## Static Export and GitHub Pages
 
 The Next.js config uses static export mode (out directory). If deploying under a subpath, set:
