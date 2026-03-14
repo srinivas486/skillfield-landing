@@ -35,6 +35,8 @@ jobs:
 
       - name: Build site
         run: npm run build
+        env:
+          NEXT_BASE_PATH: /skillfield-landing
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
