@@ -72,14 +72,16 @@ This repository follows a two-branch workflow:
 2. **Open a Pull Request** targeting `dev`.
 3. CI runs automatically (`ci.yml`) to validate the build on every push to `dev` and every PR targeting `dev`.
 4. After review and approval, **merge the PR into `dev`**.
-5. When the `dev` GitHub Pages preview looks good, **open a PR from `dev` → `main`** to promote to production.
-6. Merging into `main` triggers the production deployment workflow (`deploy.yml`) and updates the live GitHub Pages site.
+5. Merging into `dev` triggers the dev deployment workflow (`deploy-dev.yml`) and updates the **dev GitHub Pages** site (`development` environment).
+6. When the dev preview looks good, **open a PR from `dev` → `main`** to promote to production.
+7. Merging into `main` triggers the production deployment workflow (`deploy.yml`) and updates the **production GitHub Pages** site.
 
 ### GitHub Actions
 
 | Workflow | Trigger | Purpose |
 |----------|---------|---------|
 | `ci.yml` | Push to `dev`, PRs targeting `dev` | Build validation |
+| `deploy-dev.yml` | Push to `dev`, manual dispatch | Deploy to GitHub Pages (`development` environment) |
 | `deploy.yml` | Push to `main`, manual dispatch | Deploy to GitHub Pages (production) |
 
 ## Static Export and GitHub Pages
