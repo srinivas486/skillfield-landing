@@ -1,3 +1,5 @@
+import { safeHref } from "../lib/content";
+
 export default function Footer({ footer, logoAlt }) {
   return (
     <footer>
@@ -17,7 +19,7 @@ export default function Footer({ footer, logoAlt }) {
           <p className="footer-copy">{footer.copyright}</p>
 
           <div className="footer-meta">
-            {footer.location} · <a href={`mailto:${footer.email}`}>{footer.email}</a>
+            {footer.location} · <a href={safeHref(`mailto:${footer.email}`)}>{footer.email}</a>
           </div>
         </div>
       </div>

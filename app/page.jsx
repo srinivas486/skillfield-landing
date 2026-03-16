@@ -225,7 +225,7 @@ export default function HomePage() {
           <h2 id="contact-heading">{data.contact.heading}</h2>
           <p>{data.contact.description}</p>
 
-          <a href={`mailto:${data.contact.email}`} className="btn-primary">
+          <a href={safeHref(`mailto:${data.contact.email}`)} className="btn-primary">
             {data.contact.email}
           </a>
         </div>
