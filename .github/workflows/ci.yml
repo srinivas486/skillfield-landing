@@ -29,4 +29,4 @@ jobs:
       - name: Build site
         run: npm run build
         env:
-          NEXT_BASE_PATH: /skillfield-landing
+          NEXT_BASE_PATH: ${{ github.ref == 'refs/heads/dev' && '/skillfield-landing-dev' || '/skillfield-landing' }}
