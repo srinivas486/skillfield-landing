@@ -1,0 +1,36 @@
+name: Create dev branch
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  create-dev-branch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Create dev branch from main if it does not exist
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            try {
+              await github.rest.repos.getBranch({ owner, repo, branch: 'dev' });
+              core.info('dev branch already exists — skipping creation.');
+            } catch (error) {
+              if (error.status === 404) {
+                const main = await github.rest.repos.getBranch({ owner, repo, branch: 'main' });
+                await github.rest.git.createRef({
+                  owner,
+                  repo,
+                  ref: 'refs/heads/dev',
+                  sha: main.data.commit.sha,
+                });
+                core.info('dev branch created successfully from main.');
+              } else {
+                throw error;
+              }
+            }
