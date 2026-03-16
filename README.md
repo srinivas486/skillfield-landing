@@ -80,6 +80,7 @@ This repository follows a two-branch workflow:
 
 | Workflow | Trigger | Purpose |
 |----------|---------|---------|
+| `create-dev-branch.yml` | Push to `main`, manual dispatch | Create the `dev` branch from `main` if it does not exist (idempotent) |
 | `ci.yml` | Push to `dev`, PRs targeting `dev` | Build validation |
 | `deploy-dev.yml` | Push to `dev`, manual dispatch | Deploy to GitHub Pages (`development` environment) |
 | `deploy.yml` | Push to `main`, manual dispatch | Deploy to GitHub Pages (production) |
