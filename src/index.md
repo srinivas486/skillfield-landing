@@ -161,6 +161,11 @@ testimonials:
         Skillfield provided outstanding support throughout our cloud migration. Their
         team was responsive, knowledgeable, and a pleasure to work with.
       name: "James R."
+    - quote: >-
+        Skillfield's managed services have transformed how we operate. Their proactive
+        approach and deep technical knowledge give us the confidence to focus on growing
+        our business.
+      name: "Emily W."
 
 contact:
   id: "contact"
