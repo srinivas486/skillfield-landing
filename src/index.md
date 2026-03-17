@@ -166,6 +166,12 @@ testimonials:
         approach and deep technical knowledge give us the confidence to focus on growing
         our business.
       name: "Emily W."
+    - quote: >-
+        Skillfield's AI services have completely revolutionised the way we process and
+        analyse data. Their team built a custom machine-learning pipeline that cut our
+        reporting time by 60% and surfaced insights we never had before. I couldn't
+        recommend their AI capabilities more highly.
+      name: "Michael B."
 
 contact:
   id: "contact"
