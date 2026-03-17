@@ -84,6 +84,23 @@ This repository follows a two-branch workflow:
 | `ci.yml` | Push to `dev`, PRs targeting `dev` | Build validation |
 | `deploy-dev.yml` | Push to `dev`, manual dispatch | Deploy to GitHub Pages (`development` environment) |
 | `deploy.yml` | Push to `main`, manual dispatch | Deploy to GitHub Pages (production) |
+| `copilot-project-automation.yml` | Issue assigned, PR merged to `dev` | Move project board items to **Ready** when assigned to Copilot, and to **Done** when the linked PR is merged into `dev` |
+
+### Copilot Project Automation Setup
+
+The `copilot-project-automation.yml` workflow automates GitHub Project (v2) board status transitions:
+
+- **Backlog → Ready:** when an issue is assigned to the GitHub Copilot coding agent.
+- **→ Done:** when a pull request that closes the issue is merged into `dev`.
+
+**Required configuration:**
+
+1. Create a GitHub Project (v2) that contains this repository's issues.
+2. Add a **repository variable** named `PROJECT_NUMBER` with the numeric project number
+   (visible in the project URL: `/users/<owner>/projects/<number>`).
+3. Create a **Personal Access Token (PAT)** with `project` and `repo` scopes and add it as a
+   repository secret named `GH_TOKEN`.
+4. Ensure the project's **Status** field has options named exactly `Ready` and `Done`.
 
 ## Static Export and GitHub Pages
 
