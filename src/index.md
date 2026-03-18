@@ -166,6 +166,9 @@ testimonials:
         approach and deep technical knowledge give us the confidence to focus on growing
         our business.
       name: "Emily W."
+    - quote: >-
+        Skillfield's AI solutions transformed our business. Their custom ML model reduced processing time by 60% while improving accuracy. True experts in practical AI.
+      name: "Michael C."
 
 contact:
   id: "contact"
