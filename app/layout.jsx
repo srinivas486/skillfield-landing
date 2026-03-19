@@ -1,5 +1,7 @@
 import "../src/assets/css/style.css";
 
+import Chatbot from "../components/Chatbot";
+
 export const metadata = {
   title: "Skillfield",
   description:
@@ -12,7 +14,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <Chatbot />
+      </body>
     </html>
   );
 }
