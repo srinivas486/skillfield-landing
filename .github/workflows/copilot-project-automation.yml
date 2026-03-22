@@ -20,6 +20,7 @@ on:
       - closed
     branches:
       - dev
+      - main
 
 permissions:
   issues: read
@@ -40,7 +41,7 @@ jobs:
       - name: Move issue to Ready in project
         uses: actions/github-script@v7
         env:
-          PROJECT_NUMBER: ${{ vars.PROJECT_NUMBER }}
+          PROJECT_NUMBER: ${{ secrets.PROJECT_NUMBER }}
         with:
           github-token: ${{ secrets.GH_TOKEN }}
           script: |
@@ -141,7 +142,7 @@ jobs:
       - name: Move linked issues to Done in project
         uses: actions/github-script@v7
         env:
-          PROJECT_NUMBER: ${{ vars.PROJECT_NUMBER }}
+          PROJECT_NUMBER: ${{ secrets.PROJECT_NUMBER }}
         with:
           github-token: ${{ secrets.GH_TOKEN }}
           script: |
