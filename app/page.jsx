@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
+import ChatBot from "../components/ChatBot";
 import {
   dateForDateTime,
   formatDate,
@@ -232,6 +233,8 @@ export default function HomePage() {
       </section>
 
       <Footer footer={data.footer} logoAlt={data.footer.logo_alt} />
+
+      <ChatBot />
     </>
   );
 }
