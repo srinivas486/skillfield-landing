@@ -1,4 +1,5 @@
 import "../src/assets/css/style.css";
+import ChatBot from "../components/ChatBot";
 
 import Chatbot from "../components/Chatbot";
 
@@ -16,7 +17,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         {children}
-        <Chatbot />
+        <ChatBot />
       </body>
     </html>
   );
