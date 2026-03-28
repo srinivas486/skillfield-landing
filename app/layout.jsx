@@ -1,6 +1,8 @@
 import "../src/assets/css/style.css";
 import ChatBot from "../components/ChatBot";
 
+import Chatbot from "../components/Chatbot";
+
 export const metadata = {
   title: "Skillfield",
   description:
