@@ -1253,3 +1253,73 @@ footer {
     right: 1rem;
   }
 }
+
+/* ── Projects section ────────────────────────────────────── */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.project-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.project-card-header h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+.project-card p {
+  margin: 0;
+  flex: 1;
+}
+.project-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+.project-tech {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-family: monospace;
+  background: #f1f5f9;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+}
+.btn-sm {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  text-decoration: none;
+  display: inline-block;
+}
+.status-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+.status-active {
+  background: #dcfce7;
+  color: #166534;
+}
+.status-completed {
+  background: #dbeafe;
+  color: #1e40af;
+}
+.status-badge.status-active {
+  background: #dcfce7;
+  color: #166534;
+}
+.status-badge.status-completed {
+  background: #dbeafe;
+  color: #1e40af;
+}

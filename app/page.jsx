@@ -197,6 +197,35 @@ export default function HomePage() {
 
       <hr className="section-divider" />
 
+      <section id="projects" aria-labelledby="projects-heading">
+        <div className="container">
+          <div className="section-header">
+            <div className="section-label">Our Work</div>
+            <h2 id="projects-heading">Projects We're Proud Of</h2>
+            <p>Open-source tools and platforms built by Skillfield to solve real business problems.</p>
+          </div>
+          <div className="cards-grid" role="list">
+            {data.projects.map((project) => (
+              <article className="card project-card" role="listitem" key={project.name}>
+                <div className="project-card-header">
+                  <h3>{project.name}</h3>
+                  <span className={`status-badge status-${project.status}`}>{project.status_label}</span>
+                </div>
+                <p>{project.description}</p>
+                <div className="project-card-footer">
+                  <span className="project-tech">{project.tech}</span>
+                  <a href={project.repo_url} className="btn-ghost btn-sm" target="_blank" rel="noopener noreferrer">
+                    View Repo &rarr;
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <hr className="section-divider" />
+
       <section id={data.testimonials.id} aria-labelledby="testimonials-heading">
         <div className="container">
           <div className="section-header">

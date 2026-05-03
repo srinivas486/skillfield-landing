@@ -167,6 +167,44 @@ testimonials:
         our business.
       name: "Emily W."
 
+projects:
+  - name: "speaker-measure"
+    description: >-
+      Automated speaker measurement tool for home theaters and studios. Supports
+      multi-channel HDMI playback, UMIK-1 USB mic capture, Synchronized Swept Sine
+      (SSS) analysis, and export to REW/Acuourate for FIR filter generation.
+    tech: "Python · Sounddevice · NumPy · REW"
+    repo_url: "https://github.com/srinivas486/speaker-measure"
+    status: "active"
+    status_label: "Active"
+  - name: "audyssey-rew-tuner"
+    description: >-
+      Automated Audyssey EQ calibration tool that reads room measurements from REW
+      CSV files and programs Yamaha/Onkyo AV receivers via Telnet. Eliminates manual
+      multi-position averaging and Audyssey curve programming.
+    tech: "Python · Telnet · REW CSV"
+    repo_url: "https://github.com/srinivas486/audyssey-rew-tuner"
+    status: "completed"
+    status_label: "Completed"
+  - name: "Echo Console"
+    description: >-
+      Home lab dashboard and file browser for media servers. Features public share
+      links, Echo AI chat integration, server health monitoring, and multi-format
+      HTML report generation.
+    tech: "Node.js · HTTP Server · AI Integration"
+    repo_url: "http://localhost:18790"
+    status: "active"
+    status_label: "Active"
+  - name: "skillfield-landing"
+    description: >-
+      This website — Skillfield's marketing site and sales intelligence platform.
+      Next.js App Router, markdown-driven content, GitHub Pages deployment with
+      automated CI/CD and SEO optimisation.
+    tech: "Next.js · MDX · GitHub Pages"
+    repo_url: "https://github.com/srinivas486/skillfield-landing"
+    status: "completed"
+    status_label: "Live"
+
 contact:
   id: "contact"
   heading: "Let's Talk About How We Can Help"
