@@ -1,0 +1,20 @@
+{
+  "name": "skillfield-field-app",
+  "version": "1.0.0",
+  "description": "Skillfield Field App - Chatbot Demo Webapp POC",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "marked": "^18.0.5",
+    "uuid": "^14.0.0"
+  }
+}
